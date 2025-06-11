@@ -1,7 +1,7 @@
 {
   "name": "averay/standard-webhooks",
   "type": "library",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "format": "composer run-script format:codeformat && composer run-script format:php-cs-fixer && composer run-script format:psalm",
     "format:codeformat": "sh -c 'bun x codeformat fix'",

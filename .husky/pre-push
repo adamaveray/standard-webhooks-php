@@ -1,0 +1,2 @@
+#!/bin/sh
+composer run-script lint && composer run-script test

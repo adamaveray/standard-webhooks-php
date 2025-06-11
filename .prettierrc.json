@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json.schemastore.org/prettierrc",
+  "arrowParens": "always",
+  "proseWrap": "never",
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "phpVersion": "8.2",
+  "xmlWhitespaceSensitivity": "ignore",
+  "plugins": ["@prettier/plugin-php", "@prettier/plugin-xml"]
+}

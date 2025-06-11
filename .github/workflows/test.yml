@@ -1,0 +1,47 @@
+---
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches: ['*']
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php-version: [8.4]
+
+    env:
+      NODE_ENV: development
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use PHP ${{ matrix.php-version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+        env: { fail-fast: true }
+
+      - name: Cache Composer packages
+        uses: actions/cache@v3
+        env: { cache-name: composer }
+        with:
+          path: vendor
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-test-${{ env.cache-name }}-
+            ${{ runner.os }}-test-
+            ${{ runner.os }}-
+
+      - name: Install Composer packages
+        run: composer install
+
+      - name: Run tests
+        run: composer run-script test

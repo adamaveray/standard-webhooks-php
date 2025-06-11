@@ -53,7 +53,7 @@ final class Signer
     if (\str_contains($id, '.')) {
       throw new \UnexpectedValueException('Signed webhook IDs cannot contain periods.');
     }
-    return $webhook->id . '.' . $webhook->timestamp->getTimestamp() . '.' . $webhook->json;
+    return $id . '.' . $webhook->timestamp->getTimestamp() . '.' . $webhook->json;
   }
 
   public static function buildSignature(

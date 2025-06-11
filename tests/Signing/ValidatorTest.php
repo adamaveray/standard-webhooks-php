@@ -35,7 +35,7 @@ final class ValidatorTest extends TestCase
 
   public static function validateSuccessDataProvider(): iterable
   {
-    $webhook = Webhook::create('test-webhook', new \DateTimeImmutable('2025-01-01T00:00:00+00:00'), [
+    $webhook = Webhook::create('test-webhook', 'abc123', new \DateTimeImmutable('2025-01-01T00:00:00+00:00'), [
       'hello' => 'world',
     ]);
 
@@ -69,7 +69,7 @@ final class ValidatorTest extends TestCase
 
   public static function validateWrongKeyDataProvider(): iterable
   {
-    $webhook = Webhook::create('test-webhook', new \DateTimeImmutable('2025-01-01T00:00:00+00:00'), [
+    $webhook = Webhook::create('test-webhook', 'abc123', new \DateTimeImmutable('2025-01-01T00:00:00+00:00'), [
       'hello' => 'world',
     ]);
 
@@ -109,11 +109,11 @@ final class ValidatorTest extends TestCase
 
   public static function validateWrongSignatureDataProvider(): iterable
   {
-    $webhook = Webhook::create('test-webhook', new \DateTimeImmutable('2025-01-01T00:00:00+00:00'), [
+    $webhook = Webhook::create('test-webhook', 'abc123', new \DateTimeImmutable('2025-01-01T00:00:00+00:00'), [
       'hello' => 'world',
     ]);
 
-    $alternateWebhook = new Webhook('other-id', $webhook->timestamp, $webhook->json);
+    $alternateWebhook = new Webhook('test-webhook', 'xyz987', $webhook->timestamp, $webhook->json);
 
     $asymmetricKeypair = KeyFactory::generateSignatureKeyPair();
     yield 'Asymmetric' => [

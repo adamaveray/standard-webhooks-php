@@ -42,6 +42,7 @@ final readonly class RequestParser
   /**
    * @return array{
    *   id: string,
+   *   type: string,
    *   data: array<string, mixed>,
    *   metadata: array<string, mixed>,
    *   webhook: WebhookInterface,
@@ -69,15 +70,16 @@ final readonly class RequestParser
       throw new InvalidWebhookException('Invalid body.', previous: $exception);
     }
 
-    if ($body['id'] !== $id || $body['timestamp']->getTimestamp() !== $timestamp->getTimestamp()) {
-      throw new InvalidWebhookException('Webhook metadata does not match.');
+    if ($body['timestamp']->getTimestamp() !== $timestamp->getTimestamp()) {
+      throw new InvalidWebhookException('Webhook attributes do not match.');
     }
 
     $metadata = $body;
-    unset($metadata['id'], $metadata['timestamp'], $metadata['data']);
+    unset($metadata['type'], $metadata['timestamp'], $metadata['data']);
+    $type = $body['type'];
     $data = $body['data'] ?? null;
 
-    $webhook = new Webhook($id, $timestamp, $json);
+    $webhook = new Webhook($type, $id, $timestamp, $json);
 
     // Validate timestamp
     try {
@@ -96,6 +98,7 @@ final readonly class RequestParser
 
     return [
       'id' => $id,
+      'type' => $type,
       'data' => $data,
       'metadata' => $metadata,
       'webhook' => $webhook,
@@ -139,7 +142,7 @@ final readonly class RequestParser
   }
 
   /**
-   * @return array{ id: string, timestamp: \DateTimeInterface, data: array<string, mixed> }
+   * @return array{ type: string, timestamp: \DateTimeInterface, data: array{ id: string, ...array<string, mixed> } }
    */
   private static function parseBodyContent(string $json, ServerRequestInterface $request): array
   {
@@ -155,10 +158,10 @@ final readonly class RequestParser
 
     $body = \json_decode($json, true, flags: \JSON_THROW_ON_ERROR);
     if (
-      !isset($body['id']) ||
+      !isset($body['type']) ||
       !isset($body['timestamp']) ||
       !isset($body['data']) ||
-      !\is_string($body['id']) ||
+      !\is_string($body['type']) ||
       !\is_string($body['timestamp']) ||
       !\is_array($body['data'])
     ) {

@@ -5,6 +5,7 @@ namespace Averay\StandardWebhooks;
 
 interface WebhookInterface
 {
+  public string $type { get; }
   public string $id { get; }
   public \DateTimeInterface $timestamp { get;}
   public string $json { get; }

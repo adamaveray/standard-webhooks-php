@@ -5,20 +5,26 @@ namespace Averay\StandardWebhooks;
 
 readonly class Webhook implements WebhookInterface
 {
-  public function __construct(public string $id, public \DateTimeInterface $timestamp, public string $json) {}
+  public function __construct(
+    public string $type,
+    public string $id,
+    public \DateTimeInterface $timestamp,
+    public string $json,
+  ) {}
 
   /**
    * @param array<string, mixed> $data
    * @param array<string, mixed> $metadata
    */
   public static function create(
+    string $type,
     string $id,
     \DateTimeInterface $timestamp,
     array $data,
     array $metadata = [],
     bool $prettyJson = false,
   ): static {
-    return new self($id, $timestamp, self::buildJson($id, $timestamp, $data, $metadata, $prettyJson));
+    return new self($type, $id, $timestamp, self::buildJson($type, $timestamp, $data, $metadata, $prettyJson));
   }
 
   /**
@@ -26,7 +32,7 @@ readonly class Webhook implements WebhookInterface
    * @param array<string, mixed> $metadata
    */
   final protected static function buildJson(
-    string $id,
+    string $type,
     \DateTimeInterface $timestamp,
     array $data,
     array $metadata = [],
@@ -34,7 +40,7 @@ readonly class Webhook implements WebhookInterface
   ): string {
     $body =
       [
-        'id' => $id,
+        'type' => $type,
         'timestamp' => self::encodeTimestamp($timestamp),
         'data' => $data,
       ] + $metadata;

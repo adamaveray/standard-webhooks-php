@@ -8,9 +8,14 @@ final readonly class SignedWebhook extends Webhook implements SignedWebhookInter
   /**
    * @param list<string> $signatures
    */
-  public function __construct(string $id, \DateTimeInterface $timestamp, string $json, public array $signatures)
-  {
-    parent::__construct($id, $timestamp, $json);
+  public function __construct(
+    string $type,
+    string $id,
+    \DateTimeInterface $timestamp,
+    string $json,
+    public array $signatures,
+  ) {
+    parent::__construct($type, $id, $timestamp, $json);
   }
 
   /**
@@ -20,6 +25,7 @@ final readonly class SignedWebhook extends Webhook implements SignedWebhookInter
    */
   #[\Override]
   public static function create(
+    string $type,
     string $id,
     \DateTimeInterface $timestamp,
     array $data,
@@ -27,11 +33,11 @@ final readonly class SignedWebhook extends Webhook implements SignedWebhookInter
     bool $prettyJson = false,
     array $signatures = [],
   ): static {
-    return new self($id, $timestamp, self::buildJson($id, $timestamp, $data), $signatures);
+    return new self($type, $id, $timestamp, self::buildJson($type, $timestamp, $data), $signatures);
   }
 
   public static function createFromUnsigned(WebhookInterface $webhook, array $signatures): static
   {
-    return new self($webhook->id, $webhook->timestamp, $webhook->json, $signatures);
+    return new self($webhook->type, $webhook->id, $webhook->timestamp, $webhook->json, $signatures);
   }
 }

@@ -27,13 +27,14 @@ final class GeneralTest extends TestCase
     $now = new \DateTimeImmutable('2025-01-02T12:00:00+00:00');
     $timestampTolerance = new \DateInterval('PT2S');
 
+    $type = 'test-webhook';
     $id = 'abc123';
     $timestamp = $now->add(new \DateInterval('PT1S'));
     $data = ['hello' => 'world'];
     $metadata = [];
 
     // Encode & transmit
-    $outboundWebhook = Webhook::create($id, $timestamp, $data, $metadata);
+    $outboundWebhook = Webhook::create($type, $id, $timestamp, $data, $metadata);
     $builder = (new RequestBuilder())->withKey($signingKey);
     $outboundHeaders = $builder->buildHeaders($outboundWebhook);
     $outboundBody = $builder->buildBody($outboundWebhook);
@@ -54,7 +55,7 @@ final class GeneralTest extends TestCase
 
     self::assertInstanceOf(SignedWebhookInterface::class, $inboundWebhook, 'The inbound webhook should be signed.');
 
-    self::assertEquals($outboundWebhook->id, $inboundWebhook->id, 'The webhook IDs should match.');
+    self::assertEquals($outboundWebhook->type, $inboundWebhook->type, 'The webhook IDs should match.');
     self::assertEquals($outboundWebhook->timestamp, $inboundWebhook->timestamp, 'The webhook timestamps should match.');
     self::assertEquals($outboundWebhook->json, $inboundWebhook->json, 'The webhook JSON bodies should match.');
 

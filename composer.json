@@ -28,9 +28,6 @@
   },
   "require": {
     "php": ">=8.4",
-    "ext-sodium": "*",
-    "averay/http-exceptions": "^1.0",
-    "fig/http-message-util": "^1.1",
     "paragonie/halite": "^5.1",
     "psr/http-message": "^2.0"
   },

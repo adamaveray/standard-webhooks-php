@@ -4,108 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "194fd23fc85e95a9b3682134f98e17d7",
+    "content-hash": "99d8cfc6a9dee51d8aa2a9f4784bce57",
     "packages": [
-        {
-            "name": "averay/http-exceptions",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/adamaveray/http-exceptions.git",
-                "reference": "62238d4205649d5190b38ebce8f7dfabc300c533"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/adamaveray/http-exceptions/zipball/62238d4205649d5190b38ebce8f7dfabc300c533",
-                "reference": "62238d4205649d5190b38ebce8f7dfabc300c533",
-                "shasum": ""
-            },
-            "require": {
-                "fig/http-message-util": "^1.1",
-                "php": ">=8.2"
-            },
-            "require-dev": {
-                "vimeo/psalm": "^5.26"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Averay\\HttpExceptions\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Adam Averay",
-                    "homepage": "https://adamaveray.au/"
-                }
-            ],
-            "description": "Discrete exceptions for all HTTP error status code for use in a server application.",
-            "support": {
-                "issues": "https://github.com/adamaveray/http-exceptions/issues",
-                "source": "https://github.com/adamaveray/http-exceptions/tree/v1.0.1"
-            },
-            "time": "2025-05-19T05:52:10+00:00"
-        },
-        {
-            "name": "fig/http-message-util",
-            "version": "1.1.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/http-message-util.git",
-                "reference": "9d94dc0154230ac39e5bf89398b324a86f63f765"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message-util/zipball/9d94dc0154230ac39e5bf89398b324a86f63f765",
-                "reference": "9d94dc0154230ac39e5bf89398b324a86f63f765",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.3 || ^7.0 || ^8.0"
-            },
-            "suggest": {
-                "psr/http-message": "The package containing the PSR-7 interfaces"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Fig\\Http\\Message\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "https://www.php-fig.org/"
-                }
-            ],
-            "description": "Utility classes and constants for use with PSR-7 (psr/http-message)",
-            "keywords": [
-                "http",
-                "http-message",
-                "psr",
-                "psr-7",
-                "request",
-                "response"
-            ],
-            "support": {
-                "issues": "https://github.com/php-fig/http-message-util/issues",
-                "source": "https://github.com/php-fig/http-message-util/tree/1.1.5"
-            },
-            "time": "2020-11-24T22:02:12+00:00"
-        },
         {
             "name": "paragonie/constant_time_encoding",
             "version": "v3.0.0",
@@ -6511,8 +6411,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.4",
-        "ext-sodium": "*"
+        "php": ">=8.4"
     },
     "platform-dev": {},
     "plugin-api-version": "2.6.0"

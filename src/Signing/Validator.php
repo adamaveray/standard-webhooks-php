@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Averay\StandardWebhooks\Signing;
@@ -10,6 +11,7 @@ use Averay\StandardWebhooks\WebhookInterface;
 use ParagonIE\Halite\Asymmetric\Crypto;
 use ParagonIE\Halite\Asymmetric\SignaturePublicKey as AsymmetricSignaturePublicKey;
 use ParagonIE\Halite\Symmetric\SecretKey as SymmetricSecretKey;
+
 use function Averay\StandardWebhooks\getTypeForKey;
 
 final class Validator

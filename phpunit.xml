@@ -10,9 +10,7 @@
   beStrictAboutOutputDuringTests="true"
   beStrictAboutChangesToGlobalState="true"
   displayDetailsOnPhpunitDeprecations="true"
-  failOnPhpunitDeprecation="true"
-  failOnRisky="true"
-  failOnWarning="true"
+  failOnAllIssues="true"
 >
   <testsuites>
     <testsuite name="default">

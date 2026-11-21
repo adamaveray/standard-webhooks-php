@@ -35,5 +35,10 @@
     "friendsofphp/php-cs-fixer": "^3.95",
     "phpunit/phpunit": "^13.1",
     "vimeo/psalm": "^6.16"
+  },
+  "homepage": "https://codeberg.org/adamaveray/standard-webhooks-php",
+  "support": {
+    "issues": "https://codeberg.org/adamaveray/standard-webhooks-php/issues",
+    "source": "https://codeberg.org/adamaveray/standard-webhooks-php"
   }
 }

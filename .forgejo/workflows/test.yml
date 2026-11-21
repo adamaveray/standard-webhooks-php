@@ -1,5 +1,5 @@
 ---
-name: Lint
+name: Test
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
     branches: ['*']
 
 jobs:
-  lint:
+  test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -23,12 +23,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Use Bun ${{ matrix.bun-version }}
-        uses: oven-sh/setup-bun@v1
-        with: { bun-version: latest }
-
       - name: Use PHP ${{ matrix.php-version }}
-        uses: shivammathur/setup-php@v2
+        uses: https://github.com/shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
         env: { fail-fast: true }
@@ -44,22 +40,8 @@ jobs:
             ${{ runner.os }}-test-
             ${{ runner.os }}-
 
-      - name: Cache NPM packages
-        uses: actions/cache@v3
-        env: { cache-name: npm }
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('bun.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-test-${{ env.cache-name }}-
-            ${{ runner.os }}-test-
-            ${{ runner.os }}-
-
       - name: Install Composer packages
         run: composer install
 
-      - name: Install NPM packages
-        run: bun install --frozen-lockfile
-
-      - name: Lint code
-        run: composer run-script lint
+      - name: Run tests
+        run: composer run-script test
